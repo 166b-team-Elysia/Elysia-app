@@ -38,6 +38,9 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 # Slim is a template language whose goal is reduce the syntax to the essential parts without becoming cryptic.
 gem 'slim', '~> 4.1'
 
+
+gem 'bootstrap-sass', '3.4.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
