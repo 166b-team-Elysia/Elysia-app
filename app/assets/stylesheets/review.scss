@@ -1,0 +1,43 @@
+.starability-slot {
+  display: block;
+  position: relative;
+  width: 150px;
+  min-height: 35px;
+  padding: 0;
+  border: none;
+}
+.starability-slot > input {
+  position: absolute;
+  margin-right: -100%;
+  opacity: 0;
+}
+.starability-slot > input:checked ~ label, .starability-slot > input:hover ~ label {
+  background-position: 0 -30px;
+  transition: background-position 0.7s;
+}
+.starability-slot > label, .review-star {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+  cursor: pointer;
+  background-image: image-url("star1.png");
+  background-repeat: no-repeat;
+}
+.review-star {
+  background-position: 0 -30px;
+  transition: background-position 0.7s;
+}
+
+.starability-title,
+.starability-container {
+  float: left;
+}
+.starability-title {
+  height: 35px;
+  line-height: 35px;
+  margin: 0 10px;
+  font-size: 16px;
+}

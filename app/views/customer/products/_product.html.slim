@@ -3,9 +3,55 @@
     .row
       .col-sm-1 = gravatar_for product, size: 50
       .col-sm-6
-        .fs-3 = link_to product.name, '#', class: 'no-decoration'
+        .fs-3 
+          = link_to product.name, '#', class: 'no-decoration'
+          - stars = product.stars
+          - if stars
+            - stars.times do
+              .review-star
         .fs-4 = number_to_currency(product.price)
       .col-sm-4
         button.btn.btn-outline-primary
           = link_to add_customer_carts_path(product_id: product.id), method: :post, remote:  true, class: 'no-decoration'
             .fs-3 = fa_icon "shopping-cart", text: "Add To Cart", right: true
+    
+    - reviews = product.reviews.includes(:user).order(created_at: :desc)
+    - review_users = reviews.pluck(:user_id)
+    - if reviews.present?
+      p
+        a.btn.btn-primary data-bs-toggle="collapse" href="#reviews" role="button" aria-expanded="false" aria-controls="reviews"
+          | Show Reviews
+      .col
+        .collapse.multi-collapse#reviews
+          - if reviews.present?
+              - reviews.each do |r|
+                .card.card-body
+                  h3 = r.user.name
+                  = r.level
+                  = r.comment
+          - if current_user && current_user.in?(review_users)
+            .card.card-body
+              h3 Write Review:
+              = form_for( product.reviews.new, url: customer_product_add_review_path(product, store_id: product.store.id)) do |form|
+                = form.hidden_field :user_id, value: current_user.id
+                = form.hidden_field :product_id, value: product .id
+                .row
+                  .starability-container
+                    fieldset.starability-slot
+                      = form.radio_button :level, 5,{ checked: true }
+                      label for="review_level_5"
+                      = form.radio_button :level, 4
+                      label for="review_level_4"
+                      = form.radio_button :level, 3
+                      label for="review_level_3"
+                      = form.radio_button :level, 2
+                      label for="review_level_2"
+                      = form.radio_button :level, 1
+                      label for="review_level_1"
+                .row
+                  = form.text_area :comment, required: true
+                .row
+                  = form.submit :submit
+                
+
+        

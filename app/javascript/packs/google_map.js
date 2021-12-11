@@ -1,5 +1,5 @@
 import { Loader } from '@googlemaps/js-api-loader';
-import MarkerClusterer from '@googlemaps/markerclustererplus';
+// import MarkerClusterer from '@googlemaps/markerclustererplus';
 
 const loader = new Loader({
   apiKey: "AIzaSyAvwMrjYJ-pgIW-gEaxSQFkIqEPvwnNyQI",
@@ -15,7 +15,11 @@ const mapOptions = {
   zoom: 15
 };
 let map 
+
 loader.load().then(() => {
+  if($("#map").length) {
+    return;
+  }
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
   let infoWindow = new google.maps.InfoWindow();
 
@@ -28,7 +32,7 @@ loader.load().then(() => {
   });
 
   // new MarkerClusterer({ markers, map });
- 
+
   const locationButton = document.createElement("button");
   const script = document.createElement("script");
 
@@ -59,7 +63,6 @@ loader.load().then(() => {
     }
   });
 });
-
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(

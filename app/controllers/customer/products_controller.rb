@@ -25,6 +25,12 @@ class Customer::ProductsController < ApplicationController
     @product = @store.products.find_by_id(params[:id])
   end
 
+  def add_review
+    @review = Review.new(review_params)
+    @review.save
+    redirect_to customer_store_products_path(@store)
+  end
+
   private
   def set_store
     @store = Store.find_by_id(params[:store_id])
@@ -32,5 +38,8 @@ class Customer::ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :price, :store_id)
+  end
+  def review_params
+    params.require(:review).permit(:user_id, :product_id, :level, :comment)
   end
 end

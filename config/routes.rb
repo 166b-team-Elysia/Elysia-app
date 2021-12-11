@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :products do
       get :add, to: 'products#new'
       post :add, to: 'products#new'
+      post :add_review, to: 'products#add_review'
     end
 
     resources :carts do
