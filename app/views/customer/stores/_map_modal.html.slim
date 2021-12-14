@@ -7,19 +7,31 @@
       .modal-body
         .store-locations-lat data=store.latitude
         .store-locations-lng data=store.longitude
+        .store-locations-name data=store.name
+        .store-locations-address data=store.full_address
         #map style="height: 400px;"
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvwMrjYJ-pgIW-gEaxSQFkIqEPvwnNyQI&callback=initMap&v=weekly" async></script>
-      .modal-footer
-        button.btn.btn-secondary[type='button' data-bs-dismiss='modal'] Close
-
 
 javascript:
   function initMap() {
     var lat = parseFloat($('.store-locations-lat').attr('data'));
     var lng = parseFloat($('.store-locations-lng').attr('data'));
+    var name = $('.store-locations-name').attr('data');
+    var address = $('.store-locations-address').attr('data');
+    var contentString = "<h3>" + name + "</h3>" + address
     var map = new google.maps.Map(document.getElementById("map"), { center: {lat:  lat, lng:  lng},zoom: 15});
     const marker = new google.maps.Marker({
       position: {lat:  lat, lng:  lng},
       map: map,
+    });
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString,
+    });
+    marker.addListener("click", () => {
+      infowindow.open({
+        anchor: marker,
+        map,
+        shouldFocus: false,
+      });
     });
   }
