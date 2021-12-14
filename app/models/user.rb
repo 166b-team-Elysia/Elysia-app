@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   has_one :cart
-  has_many :products, through: :cart
+  has_many :cart_products, through: :cart
   has_many :orders
 
   enum role: [:customer, :admin]

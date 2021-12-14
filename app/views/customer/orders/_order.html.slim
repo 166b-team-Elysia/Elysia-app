@@ -1,0 +1,7 @@
+.container.d-flex.justify-content-center
+  .shadow.p-3.mb-5.bg-body.rounded.w-75.p-3
+    .row
+      .col-sm-1 
+        h3 = order.number
+      .col-sm-2
+        fs-2 = "Total Price: #{ number_to_currency(order.total_price)}"

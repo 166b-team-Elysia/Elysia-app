@@ -37,6 +37,12 @@ Rails.application.routes.draw do
         delete :destroy, to: 'carts#destroy'
       end
     end
+
+    resources :orders do
+      collection do
+        patch :create, to: 'orders#create'
+      end
+    end
   end
 
   resources :sessions do
