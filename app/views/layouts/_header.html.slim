@@ -20,11 +20,13 @@ nav.navbar.navbar-expand-lg.navbar-inverse
           
         
           li.nav-item = link_to "Cart", customer_carts_path
+          li.nav-item = link_to "Orders", customer_orders_path
           /li.nav-item = link_to "Users", customer_users_path
           li.dropdown.nav-item
             a.dropdown-toggle.nav-item href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               |Account
             ul.dropdown-menu aria-labelledby="navbarDropdownMenuLink"
+     
               li.dropdown-item = link_to "Profile", customer_user_path(current_user)
               li.dropdown-item = link_to "Settings", edit_customer_user_path(current_user)
               li.dropdown-item = link_to "Help", help_path

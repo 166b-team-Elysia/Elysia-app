@@ -1,28 +1,33 @@
 - if cart.present?
   - cart.keys.each do |i|
     h4 = "Store:#{i.name}"
-    - cart[i].each do |p|
-      .container.d-flex.justify-content-center
-        .shadow.p-3.mb-5.bg-body.rounded.w-75.p-3
-          .row
-            = form_for( p, url: customer_carts_path(cart_product_id: p.id)) do |form| 
-              .col-sm-1 = gravatar_for p.product, size: 50
-              .col-sm-7
-                .fs-3 
-                  = link_to p.product.name, '#', class: 'no-decoration'
-                .fs-4
-                  = number_to_currency(p.product.price)
-                  | &nbsp;&nbsp;Number: 
-                  = form.number_field :number, in: 0..99, step: 1
-                  /= "Number: #{p.number}"
-              .col-sm-4
-                h2 = "Total price: #{number_to_currency(p.total_price)}"
-                button.btn.btn-outline-danger
-                  = link_to customer_carts_path(product_id: p.product.id), method: :delete,  data: { confirm: 'Are you sure?' }, class: 'no-decoration'
-                    .fs-3.btn-outline-danger = fa_icon "shopping-cart", text: "Remove from cart", right: true
+    = form_for(current_user.order.new, url: customer_orders_path) do |o|
+      - cart[i].each do |p|
+        = o.check_box :product_ids,  {multiple: true}, p.id, nil
+        .container.d-flex.justify-content-center
+          .shadow.p-3.mb-5.bg-body.rounded.w-75.p-3
+            .row
+              = form_for( p, url: customer_carts_path(cart_product_id: p.id)) do |form| 
+                .col-sm-1 = gravatar_for p.product, size: 50
+                .col-sm-7
+                  .fs-3 
+                    = link_to p.product.name, '#', class: 'no-decoration'
+                  .fs-4
+                    = number_to_currency(p.product.price)
+                    .fs-4
+                      | &nbsp;&nbsp;Number: 
+                      = form.number_field :number, in: 0..99, step: 1
+                .col-sm-4
+                  h2 = "Total price: #{number_to_currency(p.total_price)}"
+                  button.btn.btn-outline-danger
+                    = link_to customer_carts_path(product_id: p.product.id), method: :delete,  data: { confirm: 'Are you sure?' }, class: 'no-decoration'
+                      .fs-3.btn-outline-danger = fa_icon "shopping-cart", text: "Remove from cart", right: true
   .row
     h1 = "Total: #{number_to_currency(current_user.cart.total_price)}"
 
 - else
   .container.d-flex.justify-content-center
     h2 = 'Your Cart is empty!!!!'
+
+javascript:
+  $("input[type='number']").inputSpinner();

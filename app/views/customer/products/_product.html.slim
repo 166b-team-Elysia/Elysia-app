@@ -14,9 +14,10 @@
         button.btn.btn-outline-primary
           = link_to add_customer_carts_path(product_id: product.id), method: :post, remote:  true, class: 'no-decoration'
             .fs-3 = fa_icon "shopping-cart", text: "Add To Cart", right: true
-    
+
     - reviews = product.reviews.includes(:user).order(created_at: :desc)
     - review_users = reviews.pluck(:user_id)
+
     - if reviews.present?
       p
         a.btn.btn-primary data-bs-toggle="collapse" href="#reviews" role="button" aria-expanded="false" aria-controls="reviews"
@@ -27,8 +28,11 @@
               - reviews.each do |r|
                 .card.card-body
                   h3 = r.user.name
-                  = r.level
-                  = r.comment
+                  .fs-1
+                    - r.level.times do
+                      .review-star
+                  .card.card-body
+                    = r.comment
           - if current_user && current_user.in?(review_users)
             .card.card-body
               h3 Write Review:
