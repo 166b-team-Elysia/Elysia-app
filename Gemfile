@@ -57,6 +57,8 @@ gem 'mailboxer', github: 'mailboxer/mailboxer'
 gem 'google-maps', '~> 3.0', '>= 3.0.6'
 # Client library for easily using the Cloudinary service
 gem 'cloudinary', '~> 1.21'
+# Makes http fun! Also, makes consuming restful web services dead easy.
+gem 'httparty', '~> 0.20.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
