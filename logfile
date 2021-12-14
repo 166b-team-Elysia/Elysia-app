@@ -17,3 +17,7 @@
 	   AND a.attnum > 0 AND NOT a.attisdropped
 	 ORDER BY a.attnum
 	
+2021-12-08 21:44:46.679 EST [21472] LOG:  received smart shutdown request
+2021-12-08 21:44:46.684 EST [21472] LOG:  background worker "logical replication launcher" (PID 21479) exited with exit code 1
+2021-12-08 21:44:46.685 EST [21474] LOG:  shutting down
+2021-12-08 21:44:46.710 EST [21472] LOG:  database system is shut down

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'static_pages/show'
   get  '/conversations',    to: 'conversations#index'
   get '/edit', to: 'customer/products#new'
+  get 'full_width', to: 'static_pages#full_width'
 
   resources :conversations do
     resources :messages

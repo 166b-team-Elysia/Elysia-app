@@ -8,6 +8,9 @@ class StaticPagesController < ApplicationController
   def about
   end
 
+  def full_width
+  end
+  
   def contact
   end
 
