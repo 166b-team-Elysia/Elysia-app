@@ -6,3 +6,5 @@
         .col-sm-4
           .fs-1 = link_to store.name,  customer_store_products_path(store), class: 'no-decoration'
           .fs-5.text-muted = store.full_address
+          .fs-5
+            = link_to "Show Location", customer_store_path(store), remote: true

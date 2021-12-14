@@ -1,0 +1,7 @@
+- if @store
+  |
+    var elementId = '#map-modal';
+    $(elementId).modal('hide');
+    $('.be-wrapper').empty();
+    $('.be-wrapper').append("#{j(render partial: 'map_modal', locals: {store: @store})}");
+    $(elementId).modal('show');
