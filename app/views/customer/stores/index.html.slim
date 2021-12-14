@@ -12,3 +12,17 @@ h1 All Stores
     .shadow.p-3.mb-5.bg-body.rounded.w-75.p-3
       .row
         #map style="height: 400px;"
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvwMrjYJ-pgIW-gEaxSQFkIqEPvwnNyQI&callback=initMap&v=weekly" async></script>
+
+javascript:
+
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById("map"), { center: {lat:  42.376, lng:  -71.235},zoom: 15});
+    var datas = JSON.parse($('.store-locations').attr('data'))
+    $.each(datas, function(i, val) {
+      const marker = new google.maps.Marker({
+        position: val,
+        map: map,
+      });
+    });
+  }
