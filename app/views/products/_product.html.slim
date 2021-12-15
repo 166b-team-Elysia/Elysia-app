@@ -6,5 +6,9 @@
         .fs-3 
           = link_to product.name, '#', class: 'no-decoration'
         .fs-4 = number_to_currency(product.price)
+        .fs-5
+            = link_to "Edit", edit_store_product_path(@store, product)
+            br
+            = link_to 'Destroy', store_product_path(@store, product), method: :delete, data: { confirm: 'Are you sure?' }
 
         

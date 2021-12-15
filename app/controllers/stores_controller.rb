@@ -27,11 +27,9 @@ class StoresController < ApplicationController
 
   def create
     @store = Store.new(store_params)
-
     if @store.save 
       redirect_to stores_path
     else
-
       respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @store.errors, status: :unprocessable_entity }
@@ -42,7 +40,7 @@ class StoresController < ApplicationController
   def destroy
     @store.destroy
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: "Store was successfully destroyed." }
+      format.html { redirect_to stores_path, notice: "Store was successfully destroyed." }
       format.json { head :no_content }
     end
   end

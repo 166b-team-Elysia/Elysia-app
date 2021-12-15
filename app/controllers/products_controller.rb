@@ -11,6 +11,14 @@ class ProductsController < ApplicationController
   end
 
   def update
+    if @product.update(product_params)
+      redirect_to store_products_path(@store)
+    else
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def new
@@ -18,9 +26,23 @@ class ProductsController < ApplicationController
   end
 
   def create
+    @product = @store.products.new(product_params)
+    if @product.save 
+      redirect_to store_products_path(@store)
+    else
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
+    @product.destroy
+    respond_to do |format|
+      format.html { redirect_to store_products_path(@store), notice: "Product was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
@@ -30,5 +52,9 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = @store.products.find_by_id(params[:id])
+  end
+
+  def product_params
+    params.require(:product).permit(:name, :cover,:price, :store_id, :introduce)
   end
 end
