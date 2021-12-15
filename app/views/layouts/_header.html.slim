@@ -19,7 +19,7 @@ nav.navbar.navbar-expand-lg.navbar-inverse
         - if current_user.customer?
           li.nav-item = link_to  "Stores",  customer_stores_path
           
-        
+          li.nav-item = link_to "Subscribe", about_path
           li.nav-item = link_to "Cart", customer_carts_path
           li.nav-item = link_to "Orders", customer_orders_path
           /li.nav-item = link_to "Users", customer_users_path
