@@ -1,0 +1,22 @@
+= form_with(model: product, url: store_products_path) do |form|
+  - if product.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(product.errors.count, 'error')} prohibited this product from being saved:"
+      ul
+        - product.errors.each do |error|
+          li = error.full_message
+  = form.hidden_field :store_id, value: product.store_id
+  .field
+    = form.label :name
+    = form.text_field :name, class: 'form-control' 
+  .field
+    = form.label :cover
+    = form.file_field :cover, class: 'form-control' 
+  .field
+    = form.label :price
+    = form.number_field :price, class: 'form-control' 
+  .field
+    = form.label :introduce
+    = form.text_area :introduce, class: 'form-control' 
+  .actions
+    = form.submit
