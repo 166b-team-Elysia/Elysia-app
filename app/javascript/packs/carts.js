@@ -10,10 +10,13 @@ $(document).on('click','.choose-product',function() {
 });
 
 function updateIds() {   
-  var allVals = [];      
+  var allVals = [];
+  var sum = 0;    
   $('input:checked').each(function() {
+    sum += parseFloat($(this).attr("data"));
     allVals.push($(this).val());
   })
+  $('.total-place').html("<h1>Total: "+ formatMoney(sum) + "</h1>")
   $('#order_product_ids').val(allVals)
 }
 
@@ -24,3 +27,6 @@ $(document).on('click','.submit-order',function() {
     $('#new_order')[0].submit();
   }
 });
+function formatMoney(number) {
+  return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+}

@@ -20,5 +20,3 @@ ActiveStorage.start()
 
 global.$ = require('jquery')
 global.Rails = Rails;
-
-$("input[type='number']").inputSpinner();

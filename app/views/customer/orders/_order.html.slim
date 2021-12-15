@@ -1,4 +1,20 @@
-.container.d-flex.justify-content-center
+.row.align-items-md-stretch
+  .col-md-20
+    .h-100.p-5.bg-secondary.rounded-3.bg-light
+      .col-sm-3
+        h3 = "No.#{order.number}"
+        p = "Total Price: #{ number_to_currency(order.total_price)}"
+      .col-sm-8
+        .col-5
+          - order.products[0..3].each do |p|
+            = gravatar_for p, size: 50
+        | &nbsp;
+      button.btn.btn-outline-secondary
+        h4 = order.order_status.upcase
+| &nbsp;
+
+
+/.container.d-flex.justify-content-center
   .shadow.p-3.mb-5.bg-body.rounded.w-75.p-3
     .row
       .col-sm-1 

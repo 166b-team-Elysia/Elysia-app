@@ -16,8 +16,12 @@ class User < ApplicationRecord
   has_one :cart
   has_many :cart_products, through: :cart
   has_many :orders
+  belongs_to :state
+  belongs_to :city, optional: true
 
   enum role: [:customer, :admin]
+
+  before_commit :update_latitude_and_longitude
 
   def mailboxer_email(object)
     nil
@@ -56,5 +60,30 @@ class User < ApplicationRecord
   def create_cart
     return if self.cart
     Cart.create(user: self)
+  end
+
+  def full_address_v2
+    "#{self.address} #{self.city&.name} #{self.state.abbreviation}".gsub(" ", "+")
+  end
+
+  def update_latitude_and_longitude
+    return if self.latitude.present? || self.address.blank?
+    resp =  HTTParty.get "https://maps.googleapis.com/maps/api/geocode/json?address=#{full_address_v2}&key=AIzaSyAvwMrjYJ-pgIW-gEaxSQFkIqEPvwnNyQI"
+    return if resp["status"] != "OK"
+    location =  resp["results"].first["geometry"]["location"]
+    _address = resp["results"].first["formatted_address"].split(",")
+    self.address = _address[0].strip
+    _state = State.find_by(abbreviation: _address[2].strip[0..1])
+    return if _state.blank?
+    _city = City.find_or_create_by(state_id: _state.id, name: _address[1].strip)
+    self.city_id = _city.id
+    self.latitude = location["lat"]
+    self.longitude = location["lng"]
+  end
+  
+  def distance(store)
+    return 0 if self.latitude.blank? || store.latitude.blank?
+    route = Google::Maps.route([self.latitude, self.longitude].join(","), [store.latitude, store.longitude].join(","))
+    route.distance.value
   end
 end

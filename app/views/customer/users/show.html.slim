@@ -3,5 +3,23 @@
   aside.col-md-6
     section.user_info
       h1
-        = gravatar_for @user
+        = gravatar_for @user, size: 50
         = "#{@user.name} (#{@user.email})"
+      = form_with(model: [:customer, @user]) do |f|
+
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
+
+        = f.label :avatar
+        = f.file_field :avatar, class: 'form-control'
+
+        = f.label :address
+        = f.text_field :address, class: 'form-control' 
+
+        = f.label :postal_code
+        = f.text_field :postal_code, class: 'form-control' 
+
+        = f.label :state_id
+        = f.select :state_id, State.all.pluck(:name, :id), {prompt: 'Select State'}, class: 'form-control'
+
+        = f.submit "Save changes", class: "btn btn-primary"
