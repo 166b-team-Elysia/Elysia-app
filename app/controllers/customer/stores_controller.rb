@@ -8,4 +8,8 @@ class Customer::StoresController < ApplicationController
       @stores = Store.order(:id)
     end
   end
+
+  def show
+    @store = Store.find_by_id(params[:id])
+  end
 end
