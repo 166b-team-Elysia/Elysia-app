@@ -13,6 +13,7 @@ nav.navbar.navbar-expand-lg.navbar-inverse
         li.nav-item = link_to "Message", conversations_path
 
         - if current_user.admin?
+          li.nav-item = link_to  "Manage", stores_path
           li.nav-item = link_to  "Edit",  edit_path
           li.nav-item = link_to "Log out", logout_sessions_path, method: :delete
         - if current_user.customer?

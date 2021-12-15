@@ -1,0 +1,10 @@
+.container.d-flex.justify-content-center
+  .shadow.p-3.mb-5.bg-body.rounded.w-75.p-3
+    .row
+      .col-sm-1 = gravatar_for product, size: 50
+      .col-sm-6
+        .fs-3 
+          = link_to product.name, '#', class: 'no-decoration'
+        .fs-4 = number_to_currency(product.price)
+
+        
