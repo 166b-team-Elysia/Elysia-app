@@ -11,6 +11,8 @@
 #     password_confirmation: "123456",
 #     admin: true)
 
+
+
 # Generate a bunch of additional users.
 # 99.times do |n|
 # name  = Faker::Name.name
@@ -23,6 +25,6 @@
 # end
 
 State.create(name: "M")
-Store.create!(name:  "1", state_id: 1)
+Store.create!(name:  "1", state_id: 1, city: "Waltham")
 
 Product.create(name: "apple", price: "1", store_id: 1)

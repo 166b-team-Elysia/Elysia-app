@@ -4,16 +4,16 @@ class Store < ApplicationRecord
   #validates :name, :address, :city, :state, :postal_code, :longitude, :latitude, presence: true
   has_many :products
   belongs_to :state
-  belongs_to :city
+  belongs_to :city, optional: true
 
   before_commit :update_latitude_and_longitude
 
   def full_address
-    [self.address, self.city.name, self.state.name].join(', ')
+    [self.address, self.city&.name, self.state.name].join(', ')
   end
   
   def full_address_v2
-    "#{self.address} #{self.city.name} #{self.state.abbreviation}".gsub(" ", "+")
+    "#{self.address} #{self.city&.name} #{self.state.abbreviation}".gsub(" ", "+")
   end
 
   def update_latitude_and_longitude
