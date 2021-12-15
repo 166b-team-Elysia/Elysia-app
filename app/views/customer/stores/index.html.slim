@@ -1,16 +1,2 @@
-- require 'json'
 h1 All Stores
 = render @stores
-= will_paginate @stores
-/ - data_hash = {}
-/ - @stores.each do |s|
-  / - data_hash[s.name] = [s.latitude, s.longitude]
-  - data_hash[s.name] = { lat: s.latitude, lng: s.longitude }
-
-/.store-locations data=data_hash.to_json
-/.container.d-flex.justify-content-center
-    .shadow.p-3.mb-5.bg-body.rounded.w-75.p-3
-      .row
-        #map style="height: 400px;"
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvwMrjYJ-pgIW-gEaxSQFkIqEPvwnNyQI&callback=initMap&v=weekly" async></script>
-

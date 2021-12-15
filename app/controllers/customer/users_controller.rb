@@ -35,7 +35,7 @@ class Customer::UsersController < ApplicationController
       @user = User.find(params[:id])
       if @user.update(user_params)
         flash[:success] = "Profile updated"
-        redirect_to @user
+        redirect_to customer_user_path(@user)
       else
         render 'edit'
       end
@@ -49,7 +49,7 @@ class Customer::UsersController < ApplicationController
 
     private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role, :avatar, :address, :postal_code, :state_id)
     end
 
     # Before filters
