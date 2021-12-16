@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   enum role: [:customer, :admin]
 
-  before_save :update_latitude_and_longitude, on: [ :create, :update ]
+  before_save :update_latitude_and_longitude
 
   def mailboxer_email(object)
     nil

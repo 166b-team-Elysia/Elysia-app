@@ -6,8 +6,7 @@ class Store < ApplicationRecord
   belongs_to :state
   belongs_to :city, optional: true
 
-  before_save :update_latitude_and_longitude, on: [ :create, :update ]
-
+  before_save :update_latitude_and_longitude
   def full_address
     [self.address, self.city&.name, self.state.name].join(', ')
   end
