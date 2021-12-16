@@ -6,7 +6,7 @@ class Store < ApplicationRecord
   belongs_to :state
   belongs_to :city, optional: true
 
-  before_commit :update_latitude_and_longitude
+  after_commit :update_latitude_and_longitude
 
   def full_address
     [self.address, self.city&.name, self.state.name].join(', ')
@@ -17,7 +17,6 @@ class Store < ApplicationRecord
   end
 
   def update_latitude_and_longitude
-    return if self.latitude.present?
     resp =  HTTParty.get "https://maps.googleapis.com/maps/api/geocode/json?address=#{full_address_v2}&key=AIzaSyAvwMrjYJ-pgIW-gEaxSQFkIqEPvwnNyQI"
     return if resp["status"] != "OK"
     location =  resp["results"].first["geometry"]["location"]
@@ -29,5 +28,6 @@ class Store < ApplicationRecord
     self.city_id = _city.id
     self.latitude = location["lat"]
     self.longitude = location["lng"]
+    self.save
   end
 end
