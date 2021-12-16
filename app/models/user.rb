@@ -73,7 +73,7 @@ class User < ApplicationRecord
     location =  resp["results"].first["geometry"]["location"]
     _address = resp["results"].first["formatted_address"].split(",")
     self.address = _address[0].strip
-    _state = State.find_by(abbreviation: _address[2].strip[0..1])
+    _state = State.find_by(abbreviation: _address[2].strip[0..1]) rescue self.state
     return if _state.blank?
     _city = City.find_or_create_by(state_id: _state.id, name: _address[1].strip)
     self.city_id = _city.id
