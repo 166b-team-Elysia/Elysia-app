@@ -7,6 +7,7 @@ Highlights:
 - search products and place orders
 - in-app messages
 - google maps of stores and distance from users
+- strore orders in Redis
 - subscribe
 ...
 
