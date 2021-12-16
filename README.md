@@ -1,27 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an app for online shopping.
 
-Things you may want to cover:
+Highlights:
+- admin management
+- search products and place orders
+- in-app messages
+- google maps of stores and distance from users
+- subscribe
+...
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 Heroku Link: https://protected-river-89609.herokuapp.com/
 
-test repository: https://github.com/LingyuLiu11/rbr
+demo pdf：Elysia app.pptx.pdf
